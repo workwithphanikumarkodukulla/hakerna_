@@ -3,7 +3,7 @@ class DataManager {
     constructor() {
         this.baseUrl = './data/';
         this.imageBaseUrl = './images/';
-        this.apiBaseUrl = window.SMART_STUDENT_HUB_API_BASE || 'http://localhost:4000/api';
+        this.apiBaseUrl = window.SMART_STUDENT_HUB_API_BASE || 'https://hackerna-orbit.onrender.com/api';
         this.defaultImages = {
             student: './images/profiles/default-student.svg',
             faculty: './images/profiles/default-faculty.svg',

@@ -13,7 +13,7 @@ if (typeof AOS !== 'undefined') {
 var currentUser = null;
 var currentUserType = null;
 // API_BASE_URL is now declared in api.js, so we reuse it or fallback
-const SCRIPT_API_BASE = (typeof API_BASE_URL !== 'undefined') ? API_BASE_URL : (window.SMART_STUDENT_HUB_API_BASE || 'http://localhost:4000/api');
+const SCRIPT_API_BASE = (typeof API_BASE_URL !== 'undefined') ? API_BASE_URL : (window.SMART_STUDENT_HUB_API_BASE || 'https://hackerna-orbit.onrender.com/api');
 
 async function apiRequest(path, options = {}) {
     const response = await fetch(`${SCRIPT_API_BASE}${path}`, {
