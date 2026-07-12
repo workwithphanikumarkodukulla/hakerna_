@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ananya Rao — Student Portfolio | Orbit</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --dark-bg: #0d1321;
+    --panel-bg: #131b2e;
+    --primary-color: #e8a13d;   /* signal amber */
+    --primary-dim: #7a5423;
+    --secondary-color: #2dd4bf; /* orbital teal */
+    --light-text: #eef1f5;
+    --muted-text: rgba(238,241,245,0.65);
+    --glass-bg: rgba(255,255,255,0.03);
+    --glass-border: rgba(255,255,255,0.08);
+  }
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    font-family: 'Inter', sans-serif;
+    background-image:
+      radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.25), transparent),
+      radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.18), transparent),
+      radial-gradient(1.5px 1.5px at 250px 160px, rgba(255,255,255,0.2), transparent),
+      radial-gradient(1px 1px at 320px 40px, rgba(255,255,255,0.15), transparent),
+      radial-gradient(1px 1px at 60px 220px, rgba(255,255,255,0.2), transparent);
+    background-repeat: repeat;
+    background-size: 400px 300px;
+  }
+
+  h1, h2, h3, h4, h5, .brand-font{
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .eyebrow{
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+  }
+
+  /* Navbar */
+  .navbar{
+    background: rgba(13,19,33,0.85) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .navbar-brand{ font-family:'Space Grotesk', sans-serif; letter-spacing:0.03em; }
+  .navbar-brand .fa-satellite{ color: var(--secondary-color); }
+
+  /* Header */
+  .portfolio-header{
+    padding-top: 130px;
+    padding-bottom: 60px;
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(232,161,61,0.18), transparent 60%),
+      linear-gradient(180deg, #101830 0%, var(--dark-bg) 100%);
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  /* Orbit ring around photo */
+  .orbit-wrap{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 1.75rem;
+  }
+  .orbit-ring{
+    position: absolute;
+    inset: -14px;
+    border: 1.5px dashed rgba(45,212,191,0.45);
+    border-radius: 50%;
+    animation: spin 22s linear infinite;
+  }
+  .orbit-dot{
+    position: absolute;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    box-shadow: 0 0 8px rgba(45,212,191,0.9);
+    top: -5px; left: 50%;
+    transform: translateX(-50%);
+  }
+  .orbit-dot.d2{ background: var(--primary-color); box-shadow: 0 0 8px rgba(232,161,61,0.9); }
+  @keyframes spin{ from{ transform: rotate(0deg);} to{ transform: rotate(360deg);} }
+  @media (prefers-reduced-motion: reduce){ .orbit-ring{ animation: none; } }
+
+  .profile-img-large{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--dark-bg);
+    box-shadow: 0 12px 34px rgba(0,0,0,0.45);
+    position: relative;
+    z-index: 2;
+  }
+
+  .headline-accent{ color: var(--primary-color); }
+
+  .stat-badge{
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.6rem;
+    padding: 0.55rem 1.1rem;
+    font-size: 0.92rem;
+  }
+  .stat-badge i{ color: var(--secondary-color); margin-right: 0.5rem; }
+
+  .social-links a{
+    color: var(--muted-text);
+    border: 1px solid var(--glass-border);
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0.3rem;
+    transition: all 0.2s ease;
+  }
+  .social-links a:hover{
+    color: var(--dark-bg);
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+  }
+
+  /* Cards */
+  .portfolio-card{
+    background: var(--panel-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  .card-title-row{ display:flex; align-items:center; gap:0.6rem; }
+  .card-title-row i{ color: var(--primary-color); }
+
+  .skill-tag{
+    background: rgba(45,212,191,0.1);
+    color: var(--secondary-color);
+    border: 1px solid rgba(45,212,191,0.35);
+    padding: 0.42rem 0.95rem;
+    border-radius: 2rem;
+    display: inline-block;
+    margin: 0.25rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .skill-group-label{
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted-text);
+    margin-top: 1.1rem;
+    margin-bottom: 0.4rem;
+  }
+  .skill-group-label:first-child{ margin-top: 0; }
+
+  /* Mission log timeline */
+  .timeline-item{
+    border-left: 2px solid rgba(45,212,191,0.3);
+    padding-left: 1.6rem;
+    padding-bottom: 1.7rem;
+    position: relative;
+  }
+  .timeline-item:last-child{ padding-bottom: 0; }
+  .timeline-item::before{
+    content: '';
+    position: absolute;
+    left: -7px; top: 2px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--dark-bg);
+    border: 2px solid var(--secondary-color);
+  }
+  .timeline-item.verified::before{
+    background: var(--secondary-color);
+  }
+  .timeline-date{
+    font-size: 0.78rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .timeline-title{ font-weight: 600; margin: 0.15rem 0 0.25rem; }
+  .verified-tag{
+    font-size: 0.7rem;
+    color: var(--secondary-color);
+    border: 1px solid rgba(45,212,191,0.4);
+    padding: 0.1rem 0.5rem;
+    border-radius: 1rem;
+    margin-left: 0.5rem;
+    white-space: nowrap;
+  }
+
+  .project-row{
+    border-top: 1px solid var(--glass-border);
+    padding: 1.1rem 0;
+  }
+  .project-row:first-of-type{ border-top: none; padding-top: 0; }
+  .project-row h6{ font-weight:600; margin-bottom:0.25rem; }
+  .project-row .stack-pill{
+    font-size: 0.72rem;
+    background: rgba(232,161,61,0.12);
+    color: var(--primary-color);
+    padding: 0.15rem 0.55rem;
+    border-radius: 0.4rem;
+    margin-right: 0.35rem;
+    display: inline-block;
+    margin-top: 0.4rem;
+  }
+
+  footer{
+    border-top: 1px solid var(--glass-border);
+    padding: 2rem 0;
+    font-size: 0.85rem;
+    color: var(--muted-text);
+  }
+
+  @media (max-width: 991px){
+    .portfolio-header{ padding-top: 110px; }
+  }
+
+  @media print{
+    body{ background: white !important; color: black !important; }
+    .navbar, .no-print{ display:none !important; }
+    .portfolio-card{ background: white; border-color: #ddd; box-shadow:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <i class="fas fa-satellite me-2"></i><strong>Orbit</strong>
+    </a>
+    <div class="ms-auto no-print">
+      <button class="btn btn-outline-light btn-sm" onclick="window.print()">
+        <i class="fas fa-print me-2"></i>Print Portfolio
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="portfolio-header text-center text-white">
+  <div class="container">
+    <div class="orbit-wrap">
+      <div class="orbit-ring">
+        <span class="orbit-dot"></span>
+        <span class="orbit-dot d2" style="top:auto; bottom:-5px;"></span>
+      </div>
+      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces"
+           alt="Ananya Rao" class="profile-img-large">
+    </div>
+
+    <p class="eyebrow mb-2">B.Tech · Computer Science &amp; Engineering</p>
+    <h1 class="display-5 fw-bold mb-2">Ananya Rao</h1>
+    <h3 class="h5 mb-4" style="color: var(--muted-text); font-weight:400;">
+      Building <span class="headline-accent">machine learning</span> tools people actually use
+    </h3>
+
+    <div class="d-flex justify-content-center gap-2 mb-4 flex-wrap">
+      <span class="stat-badge"><i class="fas fa-university"></i>Vasavi College of Engineering, Hyderabad</span>
+      <span class="stat-badge"><i class="fas fa-book-open"></i>4th Year · CSE</span>
+      <span class="stat-badge"><i class="fas fa-star"></i>CGPA: 9.14 / 10</span>
+    </div>
+
+    <div class="social-links">
+      <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="#" title="Resume"><i class="fas fa-file-arrow-down"></i></a>
+    </div>
+  </div>
+</header>
+
+<div class="container py-5">
+  <div class="row">
+
+    <!-- Left column -->
+    <div class="col-lg-4">
+      <div class="portfolio-card">
+        <div class="card-title-row mb-3"><i class="fas fa-user"></i><h4 class="mb-0 text-white">About Me</h4></div>
+        <p class="text-light opacity-75 mb-0">
+          I'm a final-year CSE student focused on applied machine learning — mostly computer vision
+          and small, useful automation tools. I like taking a model out of a notebook and putting it
+          somewhere a real person will click a button. Outside of coursework, I mentor juniors in the
+          college's AI club and run a small weekend workshop on Git for first-years.
+        </p>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="card-title-row mb-2"><i class="fas fa-code"></i><h4 class="mb-0 text-white">Skills</h4></div>
+
+        <p class="skill-group-label">Languages</p>
+        <div>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">SQL</span>
+        </div>
+
+        <p class="skill-group-label">ML &amp; Data</p>
+        <div>
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">scikit-learn</span>
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">OpenCV</span>
+        </div>
+
+        <p class="skill-group-label">Tools &amp; Web</p>
+        <div>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Flask</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Git</span>
+        </div>
+      </div>
+
+      <div class="portfolio-card mb-0">
+        <div class="card-title-row mb-3"><i class="fas fa-graduation-cap"></i><h4 class="mb-0 text-white">Education</h4></div>
+        <div class="timeline-item verified">
+          <span class="timeline-date">2023 — Present</span>
+          <p class="timeline-title mb-0">B.Tech, Computer Science &amp; Engineering</p>
+          <p class="text-light opacity-75 mb-0" style="font-size:0.9rem;">Vasavi College of Engineering, Hyderabad</p>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-date">2021 — 2023</span>
+          <p class="timeline-title mb-0">Higher Secondary, MPC</p>
+          <p class="text-light opacity-75 mb-0" style="font-size:0.9rem;">Narayana Junior College</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column -->
+    <div class="col-lg-8">
+      <div class="portfolio-card">
+        <div class="card-title-row mb-4"><i class="fas fa-trophy" style="color:var(--primary-color);"></i><h4 class="mb-0 text-white">Verified Achievements</h4></div>
+
+        <div class="timeline-item verified">
+          <span class="timeline-date">MAR 2026</span>
+          <p class="timeline-title mb-0">
+            Winner — Smart India Hackathon (College Round)
+            <span class="verified-tag"><i class="fas fa-circle-check me-1"></i>Verified</span>
+          </p>
+          <p class="text-light opacity-75 mb-0">
+            Led a 4-person team building an offline crop-disease detector for smallphone cameras, judged
+            by faculty and an industry mentor from a local agri-tech startup.
+          </p>
+        </div>
+
+        <div class="timeline-item verified">
+          <span class="timeline-date">NOV 2025</span>
+          <p class="timeline-title mb-0">
+            Published Paper — Undergraduate Research Symposium
+            <span class="verified-tag"><i class="fas fa-circle-check me-1"></i>Verified</span>
+          </p>
+          <p class="text-light opacity-75 mb-0">
+            Co-authored a short paper on lightweight image-classification models for low-power devices,
+            presented at the department's annual symposium.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-date">JUL 2025</span>
+          <p class="timeline-title mb-0">Summer Research Intern</p>
+          <p class="text-light opacity-75 mb-0">
+            8-week internship at a university robotics lab, working on dataset pipelines for a
+            small object-detection project.
+          </p>
+        </div>
+
+        <div class="timeline-item verified">
+          <span class="timeline-date">FEB 2025</span>
+          <p class="timeline-title mb-0">
+            2nd Place — Inter-College Data Science Challenge
+            <span class="verified-tag"><i class="fas fa-circle-check me-1"></i>Verified</span>
+          </p>
+          <p class="text-light opacity-75 mb-0">
+            Built a churn-prediction model in a 24-hour contest across 30 participating teams.
+          </p>
+        </div>
+      </div>
+
+      <div class="portfolio-card mb-0">
+        <div class="card-title-row mb-3"><i class="fas fa-diagram-project"></i><h4 class="mb-0 text-white">Projects</h4></div>
+
+        <div class="project-row">
+          <h6 class="text-white">Attendo — Face-Recognition Attendance System</h6>
+          <p class="text-light opacity-75 mb-0" style="font-size:0.92rem;">
+            A classroom attendance tool that marks students present from a single camera feed,
+            built to run on a Raspberry Pi with no internet connection required.
+          </p>
+          <div><span class="stack-pill">Python</span><span class="stack-pill">OpenCV</span><span class="stack-pill">Flask</span></div>
+        </div>
+
+        <div class="project-row">
+          <h6 class="text-white">StudyOrbit</h6>
+          <p class="text-light opacity-75 mb-0" style="font-size:0.92rem;">
+            A shared study-planner web app for hostel groups, with spaced-repetition reminders
+            and a leaderboard that nobody asked for but everyone checks daily.
+          </p>
+          <div><span class="stack-pill">React</span><span class="stack-pill">Node.js</span><span class="stack-pill">MongoDB</span></div>
+        </div>
+
+        <div class="project-row">
+          <h6 class="text-white">CropScan</h6>
+          <p class="text-light opacity-75 mb-0" style="font-size:0.92rem;">
+            The hackathon-winning crop-disease classifier, now packaged as an installable app
+            for use without a data connection in the field.
+          </p>
+          <div><span class="stack-pill">PyTorch</span><span class="stack-pill">TensorFlow Lite</span><span class="stack-pill">Kotlin</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="text-center">
+  <div class="container">
+    Ananya Rao &middot; Portfolio generated with Orbit &middot; Last updated July 2026
+  </div>
+</footer>
+
+</body>
+</html>

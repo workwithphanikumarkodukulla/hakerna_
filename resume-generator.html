@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Generator - Orbit</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Professional Resume Generator Styling */
+        body {
+            background: #f8fafc;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .controls-sidebar {
+            background: linear-gradient(135deg, #1f4e79 0%, #2d5016 100%);
+            color: white;
+            min-height: 100vh;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+        }
+        
+        .controls-header {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            margin: -24px -24px 30px -24px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .controls-header h4 {
+            margin: 0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .controls-header h4 i {
+            margin-right: 10px;
+            color: #ffd700;
+        }
+        
+        .back-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            color: white;
+            transform: translateX(-3px);
+        }
+        
+        .section-title {
+            color: #ffd700;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 8px;
+        }
+        
+        .template-selector {
+            max-height: 350px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        
+        .template-selector::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .template-selector::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+        }
+        
+        .template-selector::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+        }
+        
+        .template-option {
+            border: 2px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .template-option:hover {
+            border-color: #ffd700;
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(255,215,0,0.3);
+        }
+        
+        .template-option.selected {
+            border-color: #ffd700;
+            background: rgba(255,215,0,0.1);
+            box-shadow: 0 5px 20px rgba(255,215,0,0.4);
+        }
+        
+        .template-option img {
+            transition: transform 0.3s ease;
+        }
+        
+        .template-option:hover img {
+            transform: scale(1.05);
+        }
+        
+        .form-check {
+            margin-bottom: 12px;
+        }
+        
+        .form-check-input:checked {
+            background-color: #ffd700;
+            border-color: #ffd700;
+        }
+        
+        .form-check-input:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 0 0.25rem rgba(255,215,0,0.25);
+        }
+        
+        .form-check-label {
+            color: #e2e8f0;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #1f4e79, #2d5016);
+            border: none;
+            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #2d5016, #1f4e79);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(31,78,121,0.4);
+        }
+        
+        .btn-outline-primary {
+            border-color: rgba(255,255,255,0.5);
+            color: white;
+            font-weight: 500;
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: white;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline-success {
+            border-color: #ffd700;
+            color: #ffd700;
+            font-weight: 500;
+            padding: 10px 18px;
+            border-radius: 8px;
+        }
+        
+        .btn-outline-success:hover {
+            background: #ffd700;
+            border-color: #ffd700;
+            color: #1f4e79;
+        }
+        
+        .btn-outline-info {
+            border-color: #17a2b8;
+            color: #17a2b8;
+            font-weight: 500;
+            padding: 10px 18px;
+            border-radius: 8px;
+        }
+        
+        .btn-outline-info:hover {
+            background: #17a2b8;
+            border-color: #17a2b8;
+            color: white;
+        }
+        
+        .tips-section {
+            background: rgba(255,215,0,0.1);
+            border: 1px solid rgba(255,215,0,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .tips-section h6 {
+            color: #ffd700;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tips-section h6 i {
+            margin-right: 8px;
+        }
+        
+        .tips-section ul li {
+            color: #e2e8f0;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .tips-section ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        .resume-preview {
+            background: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            min-height: 1056px;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .resume-preview::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1f4e79, #2d5016, #ffd700, #2d5016, #1f4e79);
+            z-index: 10;
+        }
+        
+        .preview-container {
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+        
+        .loading-spinner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            flex-direction: column;
+        }
+        
+        .loading-spinner .spinner-border {
+            width: 3rem;
+            height: 3rem;
+            color: #1f4e79;
+        }
+        
+        .loading-spinner p {
+            margin-top: 20px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .controls-sidebar {
+                min-height: auto;
+                margin-bottom: 20px;
+            }
+            
+            .template-selector {
+                max-height: 250px;
+            }
+            
+            .resume-preview {
+                font-size: 12px;
+            }
+        }
+        
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .resume-preview, .resume-preview * {
+                visibility: visible;
+            }
+            .resume-preview {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                box-shadow: none;
+                border-radius: 0;
+            }
+        }
+        
+        /* Custom animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .resume-preview {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        /* Enhanced scrollbar for the page */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #1f4e79, #2d5016);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #2d5016, #1f4e79);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Enhanced Controls Sidebar -->
+            <div class="col-md-4 col-lg-3 controls-sidebar p-0">
+                <div class="p-4">
+                    <div class="controls-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4><i class="fas fa-file-alt"></i>Resume Generator</h4>
+                            <a href="student-dashboard.html" class="btn back-btn btn-sm">
+                                <i class="fas fa-arrow-left me-1"></i>Back
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Template Selection -->
+                    <div class="mb-4">
+                        <h6 class="section-title">
+                            <i class="fas fa-palette"></i>Choose Template
+                        </h6>
+                        <div class="template-selector">
+                            <div class="template-option p-2 mb-3 border rounded selected" data-template="modern" onclick="selectTemplate('modern')">
+                                <img src="https://via.placeholder.com/150x200/1f4e79/white?text=Modern+Professional" alt="Modern Template" class="img-fluid rounded">
+                                <div class="text-center mt-2">
+                                    <small class="fw-bold text-light">Modern Professional</small>
+                                    <div class="small text-muted">Clean & Contemporary</div>
+                                </div>
+                            </div>
+                            <div class="template-option p-2 mb-3 border rounded" data-template="classic" onclick="selectTemplate('classic')">
+                                <img src="https://via.placeholder.com/150x200/2d5016/white?text=Classic+Formal" alt="Classic Template" class="img-fluid rounded">
+                                <div class="text-center mt-2">
+                                    <small class="fw-bold text-light">Classic Formal</small>
+                                    <div class="small text-muted">Traditional & Professional</div>
+                                </div>
+                            </div>
+                            <div class="template-option p-2 mb-3 border rounded" data-template="creative" onclick="selectTemplate('creative')">
+                                <img src="https://via.placeholder.com/150x200/667eea/white?text=Creative+Dynamic" alt="Creative Template" class="img-fluid rounded">
+                                <div class="text-center mt-2">
+                                    <small class="fw-bold text-light">Creative Dynamic</small>
+                                    <div class="small text-muted">Colorful & Engaging</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sections Toggle -->
+                    <div class="mb-4">
+                        <h6 class="section-title">
+                            <i class="fas fa-list-check"></i>Include Sections
+                        </h6>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="includeObjective" checked onchange="updateResume()">
+                            <label class="form-check-label" for="includeObjective">
+                                <i class="fas fa-bullseye me-2"></i>Professional Objective
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="includeEducation" checked onchange="updateResume()">
+                            <label class="form-check-label" for="includeEducation">
+                                <i class="fas fa-graduation-cap me-2"></i>Education
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="includeSkills" checked onchange="updateResume()">
+                            <label class="form-check-label" for="includeSkills">
+                                <i class="fas fa-code me-2"></i>Technical Skills
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="includeProjects" checked onchange="updateResume()">
+                            <label class="form-check-label" for="includeProjects">
+                                <i class="fas fa-project-diagram me-2"></i>Projects
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="includeInternships" checked onchange="updateResume()">
+                            <label class="form-check-label" for="includeInternships">
+                                <i class="fas fa-briefcase me-2"></i>Experience
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="includeAchievements" checked onchange="updateResume()">
+                            <label class="form-check-label" for="includeAchievements">
+                                <i class="fas fa-trophy me-2"></i>Achievements
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="includeCertificates" checked onchange="updateResume()">
+                            <label class="form-check-label" for="includeCertificates">
+                                <i class="fas fa-certificate me-2"></i>Certificates
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Actions -->
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" onclick="downloadResume()">
+                            <i class="fas fa-download me-2"></i>Download PDF
+                        </button>
+                        <button class="btn btn-outline-primary" onclick="printResume()">
+                            <i class="fas fa-print me-2"></i>Print Resume
+                        </button>
+                        <button class="btn btn-outline-success" onclick="saveResume()">
+                            <i class="fas fa-save me-2"></i>Save Template
+                        </button>
+                        <button class="btn btn-outline-info" onclick="generatePortfolio()">
+                            <i class="fas fa-globe me-2"></i>Generate Portfolio
+                        </button>
+                        <button class="btn btn-outline-primary" onclick="$('#objectiveModal').modal('show')">
+                            <i class="fas fa-edit me-2"></i>Custom Objective
+                        </button>
+                    </div>
+                    
+                    <!-- Enhanced Tips -->
+                    <div class="tips-section">
+                        <h6>
+                            <i class="fas fa-lightbulb"></i>Professional Tips
+                        </h6>
+                        <ul class="small mb-0 list-unstyled">
+                            <li>Keep your resume to 1-2 pages maximum</li>
+                            <li>Use action verbs to describe achievements</li>
+                            <li>Quantify accomplishments with numbers</li>
+                            <li>Tailor content for each job application</li>
+                            <li>Proofread carefully for errors</li>
+                            <li>Use consistent formatting throughout</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Enhanced Resume Preview -->
+            <div class="col-md-8 col-lg-9 preview-container">
+                <div class="resume-preview" id="resumePreview">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Enhanced Custom Objective Modal -->
+    <div class="modal fade" id="objectiveModal" tabindex="-1" aria-labelledby="objectiveModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="objectiveModalLabel">
+                        <i class="fas fa-bullseye me-2"></i>Customize Professional Objective
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <label for="customObjective" class="form-label fw-bold">Professional Objective Statement:</label>
+                            <textarea class="form-control" id="customObjective" rows="4" 
+                                placeholder="Write a compelling professional objective that highlights your career goals and value proposition..."></textarea>
+                            <div class="form-text">
+                                <i class="fas fa-info-circle"></i>
+                                Keep it concise (2-3 sentences) and tailored to your target role.
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="fw-bold mb-3">Sample Objectives:</h6>
+                            <div class="small">
+                                <div class="p-2 mb-2 bg-light rounded cursor-pointer" onclick="useObjectiveTemplate(this)">
+                                    <strong>Software Developer:</strong> "Passionate computer science graduate seeking to leverage full-stack development skills to create innovative solutions and contribute to dynamic technology teams."
+                                </div>
+                                <div class="p-2 mb-2 bg-light rounded cursor-pointer" onclick="useObjectiveTemplate(this)">
+                                    <strong>Data Scientist:</strong> "Analytical professional with expertise in machine learning and statistical modeling, seeking to drive data-driven insights and business intelligence solutions."
+                                </div>
+                                <div class="p-2 mb-2 bg-light rounded cursor-pointer" onclick="useObjectiveTemplate(this)">
+                                    <strong>Product Manager:</strong> "Strategic thinker with technical background and business acumen, aiming to bridge technology and user needs in innovative product development."
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="applyCustomObjective()">
+                        <i class="fas fa-check me-2"></i>Apply Objective
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <i class="fas fa-check-circle me-2"></i>
+                <strong class="me-auto">Success</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toastMessage">
+                Resume updated successfully!
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/data-manager.js"></script>
+    <script src="js/resume-generator.js"></script>
+</body>
+</html>

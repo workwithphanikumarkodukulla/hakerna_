@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles - Orbit</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-graduation-cap me-2"></i>Orbit
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="articles.html">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="events.html">Events</a>
+                    </li>
+                    <li class="nav-item dropdown" id="userDropdown" style="display: none;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <img id="userAvatar" src="" alt="User" class="rounded-circle me-2" style="width: 30px; height: 30px;">
+                            <span id="userName"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="dashboardLink">
+                                <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout()">
+                                <i class="fas fa-sign-out-alt me-2"></i>Logout
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item" id="loginBtn">
+                        <button class="btn btn-primary" onclick="showLoginModal()">Login</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12 text-center">
+                    <h1 class="display-4 fw-bold mb-4" data-aos="fade-up">
+                        Knowledge Hub
+                    </h1>
+                    <p class="lead mb-4" data-aos="fade-up" data-aos-delay="100">
+                        Explore articles, insights, and knowledge shared by faculty and industry professionals
+                    </p>
+                    <div class="search-bar mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="articleSearch" placeholder="Search articles by title, author, or topic...">
+                            <button class="btn btn-primary" onclick="searchArticles()">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Filters Section -->
+    <section class="py-4 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="d-flex flex-wrap gap-3 align-items-center">
+                        <h6 class="mb-0">Filter by:</h6>
+                        <select class="form-select" style="width: auto;" id="categoryFilter" onchange="filterArticles()">
+                            <option value="">All Categories</option>
+                            <option value="technology">Technology</option>
+                            <option value="career">Career Guidance</option>
+                            <option value="research">Research</option>
+                            <option value="industry">Industry Insights</option>
+                            <option value="academic">Academic</option>
+                        </select>
+                        <select class="form-select" style="width: auto;" id="authorTypeFilter" onchange="filterArticles()">
+                            <option value="">All Authors</option>
+                            <option value="faculty">Faculty</option>
+                            <option value="industry">Industry Professional</option>
+                            <option value="student">Student</option>
+                        </select>
+                        <select class="form-select" style="width: auto;" id="sortFilter" onchange="sortArticles()">
+                            <option value="latest">Latest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="popular">Most Popular</option>
+                            <option value="trending">Trending</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Articles Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Main Content -->
+                <div class="col-lg-8">
+                    <div id="articlesContainer">
+                        <!-- Articles will be loaded here dynamically -->
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <nav aria-label="Articles pagination" class="mt-5">
+                        <ul class="pagination justify-content-center" id="articlesPagination">
+                            <!-- Pagination will be generated dynamically -->
+                        </ul>
+                    </nav>
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <!-- Featured Articles -->
+                    <div class="card mb-4" data-aos="fade-left">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-star text-warning me-2"></i>Featured Articles
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="featuredArticles">
+                                <!-- Featured articles will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Popular Categories -->
+                    <div class="card mb-4" data-aos="fade-left" data-aos-delay="100">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-tags text-primary me-2"></i>Popular Categories
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap gap-2" id="popularCategories">
+                                <!-- Categories will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Top Authors -->
+                    <div class="card mb-4" data-aos="fade-left" data-aos-delay="200">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-users text-success me-2"></i>Top Authors
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="topAuthors">
+                                <!-- Top authors will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Write Article CTA -->
+                    <div class="card border-primary" data-aos="fade-left" data-aos-delay="300">
+                        <div class="card-body text-center">
+                            <i class="fas fa-pen-to-square text-primary mb-3" style="font-size: 2rem;"></i>
+                            <h5>Share Your Knowledge</h5>
+                            <p class="text-muted">Have something valuable to share? Write an article and contribute to the community!</p>
+                            <button class="btn btn-primary" onclick="writeArticle()">
+                                <i class="fas fa-plus me-2"></i>Write Article
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Article Modal -->
+    <div class="modal fade" id="articleModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="articleModalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="articleModalContent">
+                    <!-- Article content will be loaded here -->
+                </div>
+                <div class="modal-footer">
+                    <div class="d-flex justify-content-between w-100">
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-outline-primary" onclick="likeArticle()">
+                                <i class="fas fa-thumbs-up me-1"></i><span id="likeCount">0</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-success" onclick="shareArticle()">
+                                <i class="fas fa-share me-1"></i>Share
+                            </button>
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Write Article Modal -->
+    <div class="modal fade" id="writeArticleModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Write New Article</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="writeArticleForm">
+                        <div class="mb-3">
+                            <label for="articleTitle" class="form-label">Article Title *</label>
+                            <input type="text" class="form-control" id="articleTitle" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="articleCategory" class="form-label">Category *</label>
+                                    <select class="form-select" id="articleCategory" required>
+                                        <option value="">Select Category</option>
+                                        <option value="technology">Technology</option>
+                                        <option value="career">Career Guidance</option>
+                                        <option value="research">Research</option>
+                                        <option value="industry">Industry Insights</option>
+                                        <option value="academic">Academic</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="articleTags" class="form-label">Tags (comma separated)</label>
+                                    <input type="text" class="form-control" id="articleTags" placeholder="e.g., AI, Machine Learning, Career">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="articleSummary" class="form-label">Article Summary *</label>
+                            <textarea class="form-control" id="articleSummary" rows="3" placeholder="Brief summary of your article..." required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="articleContent" class="form-label">Article Content *</label>
+                            <textarea class="form-control" id="articleContent" rows="10" placeholder="Write your article content here..." required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="articleImage" class="form-label">Featured Image (URL)</label>
+                            <input type="url" class="form-control" id="articleImage" placeholder="https://example.com/image.jpg">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" onclick="saveArticle()">
+                        <i class="fas fa-save me-1"></i>Publish Article
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h5>Orbit</h5>
+                    <p>Empowering students through comprehensive activity tracking and knowledge sharing.</p>
+                </div>
+                <div class="col-lg-6 text-lg-end">
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>&copy; 2024 Orbit. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/data-manager.js"></script>
+    <script src="js/articles.js"></script>
+</body>
+</html>

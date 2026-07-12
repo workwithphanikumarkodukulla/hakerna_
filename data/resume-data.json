@@ -1,0 +1,402 @@
+{
+  "students": {
+    "arjun.sharma@iiitg.ac.in": {
+      "personalInfo": {
+        "name": "Arjun Sharma",
+        "email": "arjun.sharma@iiitg.ac.in",
+        "phone": "+91 9876543210",
+        "address": "Guwahati, Assam, India",
+        "linkedin": "linkedin.com/in/arjunsharma",
+        "github": "github.com/arjunsharma",
+        "portfolio": "arjunsharma.dev",
+        "profileImage": "https://ui-avatars.com/api/?name=Arjun+Sharma&background=1f4e79&color=fff&size=150&bold=true"
+      },
+      "objective": "Passionate Computer Science student with strong foundation in software development, data structures, and algorithms. Seeking opportunities to contribute to innovative projects while expanding technical expertise in full-stack development and emerging technologies.",
+      "education": [
+        {
+          "degree": "Bachelor of Technology in Computer Science & Engineering",
+          "institution": "Indian Institute of Information Technology Guwahati",
+          "location": "Guwahati, Assam",
+          "duration": "2021 - 2025",
+          "cgpa": "8.7/10",
+          "coursework": ["Data Structures & Algorithms", "Database Management Systems", "Operating Systems", "Computer Networks", "Machine Learning", "Software Engineering"]
+        },
+        {
+          "degree": "Higher Secondary Education (XII)",
+          "institution": "Delhi Public School",
+          "location": "New Delhi",
+          "duration": "2019 - 2021",
+          "percentage": "94.5%",
+          "stream": "Science (PCM + Computer Science)"
+        }
+      ],
+      "skills": {
+        "programming": ["Python", "Java", "JavaScript", "C++", "TypeScript", "Go"],
+        "web": ["React.js", "Node.js", "Express.js", "HTML5", "CSS3", "Bootstrap", "Tailwind CSS"],
+        "database": ["MongoDB", "PostgreSQL", "MySQL", "Redis"],
+        "tools": ["Git", "Docker", "AWS", "VS Code", "Postman", "Figma"],
+        "frameworks": ["Django", "Spring Boot", "Next.js", "Flutter"],
+        "others": ["RESTful APIs", "GraphQL", "Microservices", "Agile", "CI/CD"]
+      },
+      "projects": [
+        {
+          "title": "Smart Student Hub",
+          "description": "Comprehensive digital platform for student record management with role-based dashboards for students, faculty, and institutions.",
+          "technologies": ["React.js", "Node.js", "MongoDB", "Express.js", "Bootstrap"],
+          "duration": "Aug 2024 - Present",
+          "highlights": [
+            "Developed responsive dashboards with government-compliant UI design",
+            "Implemented JWT-based authentication and authorization",
+            "Created interactive notification system and real-time updates",
+            "Built resume generator with multiple professional templates"
+          ],
+          "github": "github.com/arjunsharma/smart-student-hub",
+          "demo": "smartstudenthub.netlify.app"
+        },
+        {
+          "title": "EcoTrack - Carbon Footprint Monitor",
+          "description": "Mobile application to track and reduce personal carbon footprint with AI-powered recommendations.",
+          "technologies": ["Flutter", "Python", "TensorFlow", "Firebase"],
+          "duration": "Mar 2024 - Jun 2024",
+          "highlights": [
+            "Integrated ML model for carbon footprint prediction with 87% accuracy",
+            "Developed real-time tracking for transportation and energy consumption",
+            "Implemented gamification features increasing user engagement by 40%",
+            "Built community challenges and leaderboard system"
+          ],
+          "github": "github.com/arjunsharma/ecotrack"
+        },
+        {
+          "title": "CodeCollab - Real-time Code Editor",
+          "description": "Collaborative online code editor with real-time synchronization and video chat integration.",
+          "technologies": ["React.js", "Socket.io", "Node.js", "Monaco Editor", "WebRTC"],
+          "duration": "Jan 2024 - Feb 2024",
+          "highlights": [
+            "Built real-time collaborative editing using operational transformation",
+            "Integrated video/audio chat with WebRTC for pair programming",
+            "Implemented syntax highlighting for 20+ programming languages",
+            "Added code execution environment with Docker containers"
+          ],
+          "github": "github.com/arjunsharma/codecollab",
+          "demo": "codecollab.herokuapp.com"
+        }
+      ],
+      "internships": [
+        {
+          "company": "TechCorp Solutions Pvt. Ltd.",
+          "position": "Software Development Intern",
+          "location": "Bangalore, Karnataka",
+          "duration": "May 2024 - Jul 2024",
+          "description": "Worked on developing microservices architecture for e-commerce platform serving 100K+ users.",
+          "achievements": [
+            "Optimized database queries resulting in 35% performance improvement",
+            "Developed RESTful APIs using Spring Boot and integrated with Redis caching",
+            "Collaborated with cross-functional teams using Agile methodology",
+            "Implemented automated testing suite achieving 90% code coverage"
+          ],
+          "technologies": ["Spring Boot", "PostgreSQL", "Redis", "AWS", "Docker"]
+        },
+        {
+          "company": "StartupXYZ",
+          "position": "Frontend Developer Intern",
+          "location": "Remote",
+          "duration": "Dec 2023 - Feb 2024",
+          "description": "Contributed to developing responsive web application for digital marketing platform.",
+          "achievements": [
+            "Built 15+ reusable React components following best practices",
+            "Improved website loading speed by 25% through code optimization",
+            "Implemented responsive design supporting mobile, tablet, and desktop",
+            "Integrated third-party APIs for social media analytics"
+          ],
+          "technologies": ["React.js", "TypeScript", "Styled Components", "Chart.js"]
+        }
+      ],
+      "achievements": [
+        {
+          "title": "Winner - Smart India Hackathon 2024",
+          "description": "Led team of 6 to develop innovative solution for digital student record management",
+          "date": "Sep 2024",
+          "category": "Hackathon"
+        },
+        {
+          "title": "2nd Runner Up - National Coding Competition",
+          "description": "Secured 3rd position among 500+ participants in algorithmic problem solving",
+          "date": "Mar 2024",
+          "category": "Competition"
+        },
+        {
+          "title": "Best Project Award - College Tech Fest",
+          "description": "Awarded for most innovative project in AI/ML category",
+          "date": "Nov 2023",
+          "category": "Academic"
+        },
+        {
+          "title": "Dean's List - Academic Excellence",
+          "description": "Recognized for maintaining CGPA above 8.5 for consecutive semesters",
+          "date": "Jul 2023",
+          "category": "Academic"
+        }
+      ],
+      "certificates": [
+        {
+          "title": "AWS Certified Cloud Practitioner",
+          "issuer": "Amazon Web Services",
+          "date": "Aug 2024",
+          "credentialId": "AWS-CCP-2024-AS789",
+          "validUntil": "Aug 2027"
+        },
+        {
+          "title": "Meta Frontend Developer Professional Certificate",
+          "issuer": "Meta (Coursera)",
+          "date": "Jun 2024",
+          "credentialId": "META-FE-2024-AS456"
+        },
+        {
+          "title": "Google Data Analytics Professional Certificate",
+          "issuer": "Google (Coursera)",
+          "date": "Apr 2024",
+          "credentialId": "GOOGLE-DA-2024-AS123"
+        },
+        {
+          "title": "Oracle Certified Associate - Java SE 11",
+          "issuer": "Oracle Corporation",
+          "date": "Feb 2024",
+          "credentialId": "OCA-JAVA-2024-AS321"
+        }
+      ],
+      "extracurricular": [
+        {
+          "title": "Technical Secretary",
+          "organization": "Computer Science Society, IIIT Guwahati",
+          "duration": "Aug 2023 - Present",
+          "description": "Organized technical workshops, coding competitions, and guest lectures for 200+ students"
+        },
+        {
+          "title": "Volunteer",
+          "organization": "CodeForGood NGO",
+          "duration": "Jan 2023 - Present",
+          "description": "Contributed to open-source projects for social impact and taught programming to underprivileged children"
+        }
+      ]
+    },
+    "priya.patel@iiitg.ac.in": {
+      "personalInfo": {
+        "name": "Priya Patel",
+        "email": "priya.patel@iiitg.ac.in",
+        "phone": "+91 9123456789",
+        "address": "Ahmedabad, Gujarat, India",
+        "linkedin": "linkedin.com/in/priyapatel",
+        "github": "github.com/priyapatel",
+        "portfolio": "priyapatel.github.io",
+        "profileImage": "https://ui-avatars.com/api/?name=Priya+Patel&background=2d5016&color=fff&size=150&bold=true"
+      },
+      "objective": "Dedicated Computer Science student specializing in artificial intelligence and machine learning. Passionate about developing intelligent systems that solve real-world problems and improve human lives through technology innovation.",
+      "education": [
+        {
+          "degree": "Bachelor of Technology in Computer Science & Engineering",
+          "institution": "Indian Institute of Information Technology Guwahati",
+          "location": "Guwahati, Assam",
+          "duration": "2021 - 2025",
+          "cgpa": "9.1/10",
+          "coursework": ["Machine Learning", "Deep Learning", "Natural Language Processing", "Computer Vision", "Data Mining", "Artificial Intelligence"]
+        },
+        {
+          "degree": "Higher Secondary Education (XII)",
+          "institution": "Kendriya Vidyalaya",
+          "location": "Ahmedabad, Gujarat",
+          "duration": "2019 - 2021",
+          "percentage": "96.2%",
+          "stream": "Science (PCM + Computer Science)"
+        }
+      ],
+      "skills": {
+        "programming": ["Python", "R", "MATLAB", "Java", "C++", "SQL"],
+        "ml_ai": ["TensorFlow", "PyTorch", "Scikit-learn", "Keras", "OpenCV", "NLTK"],
+        "data": ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Jupyter", "Tableau"],
+        "web": ["Flask", "Django", "React.js", "HTML5", "CSS3", "JavaScript"],
+        "tools": ["Git", "Docker", "AWS", "Google Cloud", "Anaconda", "VS Code"],
+        "others": ["Statistics", "Data Visualization", "Research Methodology", "Technical Writing"]
+      },
+      "projects": [
+        {
+          "title": "MedAssist AI - Medical Diagnosis Assistant",
+          "description": "AI-powered medical diagnosis system using computer vision and NLP for preliminary health assessment.",
+          "technologies": ["Python", "TensorFlow", "OpenCV", "Flask", "React.js"],
+          "duration": "Jun 2024 - Present",
+          "highlights": [
+            "Developed CNN model for medical image analysis with 92% accuracy",
+            "Implemented NLP pipeline for symptom analysis and diagnosis prediction",
+            "Created responsive web interface for patient interaction",
+            "Collaborated with medical professionals for dataset validation"
+          ],
+          "github": "github.com/priyapatel/medassist-ai"
+        },
+        {
+          "title": "EduPredict - Student Performance Analytics",
+          "description": "Machine learning platform to predict student performance and provide personalized learning recommendations.",
+          "technologies": ["Python", "Scikit-learn", "Pandas", "Streamlit", "PostgreSQL"],
+          "duration": "Feb 2024 - May 2024",
+          "highlights": [
+            "Built ensemble model achieving 89% prediction accuracy",
+            "Analyzed 10,000+ student records to identify performance patterns",
+            "Developed interactive dashboard for educators and students",
+            "Implemented recommendation system for personalized learning paths"
+          ],
+          "github": "github.com/priyapatel/edupredict",
+          "demo": "edupredict.streamlit.app"
+        },
+        {
+          "title": "SentimentScope - Social Media Analysis",
+          "description": "Real-time sentiment analysis tool for social media posts using advanced NLP techniques.",
+          "technologies": ["Python", "NLTK", "Twitter API", "MongoDB", "D3.js"],
+          "duration": "Oct 2023 - Jan 2024",
+          "highlights": [
+            "Processed 1M+ tweets daily with real-time sentiment classification",
+            "Achieved 85% accuracy using BERT-based transformer model",
+            "Created interactive visualization dashboard for trend analysis",
+            "Implemented multi-language support for 5 languages"
+          ],
+          "github": "github.com/priyapatel/sentimentscope"
+        }
+      ],
+      "internships": [
+        {
+          "company": "DataSoft Analytics",
+          "position": "Machine Learning Intern",
+          "location": "Mumbai, Maharashtra",
+          "duration": "May 2024 - Jul 2024",
+          "description": "Worked on developing predictive models for customer behavior analysis in e-commerce domain.",
+          "achievements": [
+            "Built recommendation system increasing customer engagement by 28%",
+            "Developed churn prediction model with 91% accuracy using ensemble methods",
+            "Optimized data preprocessing pipeline reducing training time by 40%",
+            "Presented findings to stakeholders and implemented A/B testing framework"
+          ],
+          "technologies": ["Python", "TensorFlow", "AWS SageMaker", "Apache Spark", "MLflow"]
+        }
+      ],
+      "achievements": [
+        {
+          "title": "Gold Medal - Inter-College AI Competition",
+          "description": "First place in state-level artificial intelligence project competition",
+          "date": "Aug 2024",
+          "category": "Competition"
+        },
+        {
+          "title": "Research Paper Published - IEEE Conference",
+          "description": "Co-authored paper on 'Deep Learning Approaches for Medical Image Segmentation'",
+          "date": "May 2024",
+          "category": "Research"
+        },
+        {
+          "title": "Women in Tech Scholarship",
+          "description": "Awarded scholarship for excellence in technology and leadership",
+          "date": "Jan 2024",
+          "category": "Scholarship"
+        },
+        {
+          "title": "Topper - Machine Learning Course",
+          "description": "Highest grade in advanced machine learning course with 98% marks",
+          "date": "Dec 2023",
+          "category": "Academic"
+        }
+      ],
+      "certificates": [
+        {
+          "title": "TensorFlow Developer Certificate",
+          "issuer": "Google",
+          "date": "Jul 2024",
+          "credentialId": "TF-DEV-2024-PP789"
+        },
+        {
+          "title": "AWS Certified Machine Learning - Specialty",
+          "issuer": "Amazon Web Services",
+          "date": "Jun 2024",
+          "credentialId": "AWS-MLS-2024-PP456"
+        },
+        {
+          "title": "Deep Learning Specialization",
+          "issuer": "DeepLearning.AI (Coursera)",
+          "date": "Apr 2024",
+          "credentialId": "DL-SPEC-2024-PP123"
+        }
+      ],
+      "extracurricular": [
+        {
+          "title": "President",
+          "organization": "AI/ML Club, IIIT Guwahati",
+          "duration": "Jan 2024 - Present",
+          "description": "Led initiatives to promote AI/ML education and organized workshops for 300+ students"
+        },
+        {
+          "title": "Mentor",
+          "organization": "Women in Computing Society",
+          "duration": "Aug 2023 - Present",
+          "description": "Mentored junior students in programming and career guidance"
+        }
+      ]
+    },
+    "rahul.singh@iiitg.ac.in": {
+      "personalInfo": {
+        "name": "Rahul Singh",
+        "email": "rahul.singh@iiitg.ac.in",
+        "phone": "+91 9988776655",
+        "address": "Kanpur, Uttar Pradesh, India",
+        "linkedin": "linkedin.com/in/rahulsingh",
+        "github": "github.com/rahulsingh",
+        "portfolio": "rahulsingh.dev",
+        "profileImage": "https://ui-avatars.com/api/?name=Rahul+Singh&background=5b2c6f&color=fff&size=150&bold=true"
+      },
+      "objective": "Aspiring software engineer with expertise in full-stack development and system design. Passionate about building scalable applications and contributing to innovative technology solutions in a collaborative environment.",
+      "education": [
+        {
+          "degree": "Bachelor of Technology in Computer Science & Engineering",
+          "institution": "Indian Institute of Information Technology Guwahati",
+          "location": "Guwahati, Assam",
+          "duration": "2021 - 2025",
+          "cgpa": "8.4/10",
+          "coursework": ["System Design", "Distributed Systems", "Cloud Computing", "Software Architecture", "Algorithms", "Database Systems"]
+        }
+      ],
+      "skills": {
+        "programming": ["Java", "Python", "JavaScript", "Go", "Kotlin", "Swift"],
+        "backend": ["Spring Boot", "Node.js", "Django", "Express.js", "Microservices"],
+        "frontend": ["React.js", "Angular", "Vue.js", "React Native", "Flutter"],
+        "database": ["PostgreSQL", "MongoDB", "Redis", "Elasticsearch", "Cassandra"],
+        "cloud": ["AWS", "Google Cloud", "Azure", "Kubernetes", "Docker"],
+        "tools": ["Jenkins", "Terraform", "Prometheus", "Grafana", "Git", "Jira"]
+      },
+      "projects": [
+        {
+          "title": "ScaleChat - Distributed Messaging System",
+          "description": "High-performance distributed messaging platform supporting millions of concurrent users with real-time communication.",
+          "technologies": ["Go", "Redis", "PostgreSQL", "WebSocket", "Kubernetes"],
+          "duration": "Apr 2024 - Aug 2024",
+          "highlights": [
+            "Designed microservices architecture handling 1M+ concurrent connections",
+            "Implemented message persistence with 99.9% reliability",
+            "Built auto-scaling system reducing infrastructure costs by 30%",
+            "Achieved sub-100ms message delivery latency"
+          ],
+          "github": "github.com/rahulsingh/scalechat"
+        }
+      ],
+      "achievements": [
+        {
+          "title": "Best System Design Project",
+          "description": "Awarded for exceptional distributed system architecture design",
+          "date": "Jun 2024",
+          "category": "Academic"
+        }
+      ],
+      "certificates": [
+        {
+          "title": "Certified Kubernetes Administrator",
+          "issuer": "Cloud Native Computing Foundation",
+          "date": "May 2024",
+          "credentialId": "CKA-2024-RS789"
+        }
+      ]
+    }
+  }
+}

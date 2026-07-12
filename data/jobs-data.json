@@ -1,0 +1,279 @@
+{
+  "companies": [
+    {
+      "id": 1,
+      "name": "TechCorp Solutions",
+      "logo": "https://via.placeholder.com/60x60/007bff/white?text=TC",
+      "description": "Leading technology solutions provider",
+      "website": "www.techcorp.com",
+      "location": "Mumbai",
+      "employees": "1000+",
+      "industry": "Technology"
+    },
+    {
+      "id": 2,
+      "name": "DataFlow Analytics",
+      "logo": "https://via.placeholder.com/60x60/28a745/white?text=DF",
+      "description": "Data science and analytics company",
+      "website": "www.dataflow.com",
+      "location": "Bangalore",
+      "employees": "500-1000",
+      "industry": "Analytics"
+    },
+    {
+      "id": 3,
+      "name": "StartupHub",
+      "logo": "https://via.placeholder.com/60x60/dc3545/white?text=SH",
+      "description": "Innovation and startup incubator",
+      "website": "www.startuphub.com",
+      "location": "Delhi",
+      "employees": "100-500",
+      "industry": "Incubator"
+    },
+    {
+      "id": 4,
+      "name": "CloudTech Systems",
+      "logo": "https://via.placeholder.com/60x60/6f42c1/white?text=CT",
+      "description": "Cloud infrastructure and services",
+      "website": "www.cloudtech.com",
+      "location": "Hyderabad",
+      "employees": "500-1000",
+      "industry": "Cloud Services"
+    },
+    {
+      "id": 5,
+      "name": "DesignStudio Pro",
+      "logo": "https://via.placeholder.com/60x60/fd7e14/white?text=DS",
+      "description": "Creative design and branding agency",
+      "website": "www.designstudio.com",
+      "location": "Pune",
+      "employees": "50-100",
+      "industry": "Design"
+    }
+  ],
+  "jobCategories": [
+    {
+      "id": 1,
+      "name": "Software Development",
+      "icon": "fas fa-code",
+      "count": 450,
+      "percentage": 45
+    },
+    {
+      "id": 2,
+      "name": "Data Science",
+      "icon": "fas fa-chart-bar",
+      "count": 250,
+      "percentage": 25
+    },
+    {
+      "id": 3,
+      "name": "Digital Marketing",
+      "icon": "fas fa-bullhorn",
+      "count": 150,
+      "percentage": 15
+    },
+    {
+      "id": 4,
+      "name": "UI/UX Design",
+      "icon": "fas fa-palette",
+      "count": 100,
+      "percentage": 10
+    },
+    {
+      "id": 5,
+      "name": "Others",
+      "icon": "fas fa-ellipsis-h",
+      "count": 50,
+      "percentage": 5
+    }
+  ],
+  "jobs": [
+    {
+      "id": 1,
+      "title": "Full Stack Developer",
+      "company": "TechCorp Solutions",
+      "companyId": 1,
+      "location": "Mumbai",
+      "type": "fulltime",
+      "experience": "1-3",
+      "salary": "₹8-12 LPA",
+      "description": "Join our dynamic team as a Full Stack Developer and work on cutting-edge web applications using React, Node.js, and MongoDB. You'll be responsible for developing both frontend and backend components, ensuring seamless integration and optimal performance.",
+      "requirements": [
+        "Bachelor's degree in Computer Science or related field",
+        "1-3 years of experience in full stack development",
+        "Proficiency in JavaScript, React, Node.js",
+        "Experience with databases (MongoDB, MySQL)",
+        "Knowledge of RESTful APIs and version control (Git)"
+      ],
+      "responsibilities": [
+        "Develop and maintain web applications using modern frameworks",
+        "Write clean, maintainable, and efficient code",
+        "Collaborate with cross-functional teams",
+        "Participate in code reviews and testing",
+        "Stay updated with latest technology trends"
+      ],
+      "skills": ["React", "Node.js", "MongoDB", "JavaScript", "HTML/CSS"],
+      "posted": "2024-09-21",
+      "deadline": "2024-10-21",
+      "featured": true,
+      "remote": false,
+      "category": "Software Development"
+    },
+    {
+      "id": 2,
+      "title": "Data Scientist",
+      "company": "DataFlow Analytics",
+      "companyId": 2,
+      "location": "Bangalore",
+      "type": "fulltime",
+      "experience": "3-5",
+      "salary": "₹15-20 LPA",
+      "description": "Seeking an experienced Data Scientist to analyze complex datasets and build machine learning models for business insights. Work with large-scale data and cutting-edge ML technologies.",
+      "requirements": [
+        "Master's degree in Data Science, Statistics, or related field",
+        "3-5 years of experience in data science",
+        "Strong programming skills in Python/R",
+        "Experience with ML frameworks (TensorFlow, PyTorch)",
+        "Knowledge of statistical analysis and data visualization"
+      ],
+      "responsibilities": [
+        "Develop and implement machine learning models",
+        "Analyze large datasets to extract business insights",
+        "Create data visualizations and reports",
+        "Collaborate with business teams to understand requirements",
+        "Optimize model performance and accuracy"
+      ],
+      "skills": ["Python", "Machine Learning", "SQL", "TensorFlow", "Statistics"],
+      "posted": "2024-09-22",
+      "deadline": "2024-10-22",
+      "featured": false,
+      "remote": true,
+      "category": "Data Science"
+    },
+    {
+      "id": 3,
+      "title": "Frontend Developer Intern",
+      "company": "StartupHub",
+      "companyId": 3,
+      "location": "Delhi",
+      "type": "internship",
+      "experience": "0-1",
+      "salary": "₹25,000/month",
+      "description": "Great opportunity for students to gain hands-on experience in frontend development with modern frameworks. Work on real projects and learn from experienced developers.",
+      "requirements": [
+        "Currently pursuing or recently completed degree in CS/IT",
+        "Basic knowledge of HTML, CSS, JavaScript",
+        "Familiarity with React or similar frameworks",
+        "Eagerness to learn and grow",
+        "Good communication skills"
+      ],
+      "responsibilities": [
+        "Assist in developing user interfaces",
+        "Write clean and maintainable code",
+        "Participate in team meetings and discussions",
+        "Learn new technologies and frameworks",
+        "Support senior developers in project delivery"
+      ],
+      "skills": ["React", "JavaScript", "CSS", "HTML", "Git"],
+      "posted": "2024-09-20",
+      "deadline": "2024-10-20",
+      "featured": false,
+      "remote": false,
+      "category": "Software Development"
+    },
+    {
+      "id": 4,
+      "title": "DevOps Engineer",
+      "company": "CloudTech Systems",
+      "companyId": 4,
+      "location": "Hyderabad",
+      "type": "fulltime",
+      "experience": "3-5",
+      "salary": "₹12-18 LPA",
+      "description": "Join our infrastructure team to manage CI/CD pipelines, containerization, and cloud deployments. Work with cutting-edge DevOps tools and practices.",
+      "requirements": [
+        "Bachelor's degree in Engineering or related field",
+        "3-5 years of DevOps experience",
+        "Experience with Docker, Kubernetes",
+        "Knowledge of AWS/Azure cloud platforms",
+        "Scripting skills in Python/Bash"
+      ],
+      "responsibilities": [
+        "Design and maintain CI/CD pipelines",
+        "Manage containerized applications",
+        "Monitor system performance and security",
+        "Automate deployment processes",
+        "Collaborate with development teams"
+      ],
+      "skills": ["Docker", "Kubernetes", "AWS", "Jenkins", "Linux"],
+      "posted": "2024-09-19",
+      "deadline": "2024-10-19",
+      "featured": true,
+      "remote": true,
+      "category": "Software Development"
+    },
+    {
+      "id": 5,
+      "title": "UI/UX Designer",
+      "company": "DesignStudio Pro",
+      "companyId": 5,
+      "location": "Pune",
+      "type": "parttime",
+      "experience": "1-3",
+      "salary": "₹6-10 LPA",
+      "description": "Creative UI/UX Designer needed to design intuitive user interfaces and enhance user experience. Work on diverse projects for various clients.",
+      "requirements": [
+        "Bachelor's degree in Design or related field",
+        "1-3 years of UI/UX design experience",
+        "Proficiency in design tools (Figma, Adobe XD)",
+        "Strong portfolio demonstrating design skills",
+        "Understanding of user-centered design principles"
+      ],
+      "responsibilities": [
+        "Create wireframes and prototypes",
+        "Design user interfaces for web and mobile",
+        "Conduct user research and testing",
+        "Collaborate with developers and stakeholders",
+        "Maintain design systems and guidelines"
+      ],
+      "skills": ["Figma", "Adobe XD", "Photoshop", "Wireframing", "Prototyping"],
+      "posted": "2024-09-18",
+      "deadline": "2024-10-18",
+      "featured": false,
+      "remote": true,
+      "category": "UI/UX Design"
+    }
+  ],
+  "applicationStats": {
+    "totalJobs": 1250,
+    "totalCompanies": 500,
+    "totalApplications": 15000,
+    "successRate": 98,
+    "activeJobs": 1250,
+    "newJobsThisWeek": 45,
+    "companiesHiring": 125
+  },
+  "popularSkills": [
+    { "name": "JavaScript", "demand": 85 },
+    { "name": "Python", "demand": 80 },
+    { "name": "React", "demand": 75 },
+    { "name": "Node.js", "demand": 70 },
+    { "name": "Machine Learning", "demand": 68 },
+    { "name": "AWS", "demand": 65 },
+    { "name": "Docker", "demand": 60 },
+    { "name": "SQL", "demand": 55 },
+    { "name": "Git", "demand": 50 },
+    { "name": "Figma", "demand": 45 }
+  ],
+  "locations": [
+    { "name": "Mumbai", "jobs": 250 },
+    { "name": "Bangalore", "jobs": 320 },
+    { "name": "Delhi", "jobs": 180 },
+    { "name": "Hyderabad", "jobs": 150 },
+    { "name": "Chennai", "jobs": 120 },
+    { "name": "Pune", "jobs": 100 },
+    { "name": "Kolkata", "jobs": 80 },
+    { "name": "Remote", "jobs": 50 }
+  ]
+}

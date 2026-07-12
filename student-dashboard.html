@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Orbit</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* ===== Orbit — Orange & Black token system ===== */
+            --primary-color: #f97316;      /* signal orange */
+            --primary-dark: #ea580c;
+            --primary-light: #fb923c;
+            --primary-soft: rgba(249, 115, 22, 0.14);
+            --primary-glow: rgba(249, 115, 22, 0.35);
+
+            --secondary-color: #22c55e;    /* verified / success */
+            --success-color: #22c55e;
+            --danger-color: #ef4444;
+            --warning-color: #eab308;
+            --info-color: #38bdf8;
+            --accent-color: #f97316;
+
+            --bg-primary: #0a0a0b;
+            --bg-secondary: #131315;
+            --bg-tertiary: #1c1c1f;
+            --bg-card: rgba(255, 255, 255, 0.035);
+            --bg-card-hover: rgba(255, 255, 255, 0.06);
+            --bg-sidebar: #0d0d0f;
+
+            --text-primary: #f7f5f2;
+            --text-secondary: #c9c5bf;
+            --text-muted: #8a8681;
+            --text-accent: #f97316;
+
+            --glass-bg: rgba(255, 255, 255, 0.035);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-border-strong: rgba(249, 115, 22, 0.35);
+            --glass-shadow: 0 8px 28px 0 rgba(0, 0, 0, 0.55);
+            --glass-backdrop: blur(14px);
+
+            --btn-glass-primary: rgba(249, 115, 22, 0.16);
+            --btn-glass-secondary: rgba(34, 197, 94, 0.14);
+            --btn-glass-accent: rgba(249, 115, 22, 0.20);
+
+            --shadow-lg: 0 12px 24px -6px rgba(0, 0, 0, 0.6);
+            --shadow-glass: 0 8px 28px 0 rgba(0, 0, 0, 0.5);
+            --shadow-orange: 0 8px 24px -4px rgba(249, 115, 22, 0.35);
+
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-pill: 999px;
+        }
+
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1, h2, h3, h4, h5, h6, .card-title, .credit-badge {
+            font-family: 'Manrope', sans-serif;
+            letter-spacing: -0.01em;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 12% 8%, rgba(249, 115, 22, 0.10) 0%, transparent 45%),
+                radial-gradient(circle at 88% 15%, rgba(249, 115, 22, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 50% 100%, rgba(249, 115, 22, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        ::selection {
+            background: var(--primary-color);
+            color: #0a0a0b;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: #2a2a2d; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
+
+        /* ===== Sidebar ===== */
+        .dashboard-sidebar {
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--glass-border);
+            min-height: 100vh;
+            color: var(--text-primary);
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.35);
+            display: flex;
+            flex-direction: column;
+            position: sticky;
+            top: 0;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1.4rem 1.5rem 1rem;
+            border-bottom: 1px solid var(--glass-border);
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-brand .brand-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0a0a0b;
+            font-weight: 800;
+            font-size: 0.95rem;
+            box-shadow: var(--shadow-orange);
+        }
+
+        .sidebar-brand .brand-name {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            letter-spacing: 0.01em;
+        }
+
+        .sidebar-item {
+            padding: 0.85rem 1.1rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border-radius: var(--radius-sm);
+            margin: 0.2rem 0.75rem;
+            border-left: 3px solid transparent;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.93rem;
+        }
+
+        .sidebar-item i {
+            width: 18px;
+            text-align: center;
+            color: var(--text-muted);
+            transition: color 0.25s ease;
+        }
+
+        .sidebar-item:hover {
+            background: rgba(249, 115, 22, 0.08);
+            border-left: 3px solid var(--primary-light);
+            transform: translateX(3px);
+            color: var(--text-primary);
+        }
+
+        .sidebar-item:hover i { color: var(--primary-light); }
+
+        .sidebar-item.active {
+            background: linear-gradient(90deg, rgba(249, 115, 22, 0.22), rgba(249, 115, 22, 0.04));
+            border-left: 3px solid var(--primary-color);
+            box-shadow: inset 0 0 18px rgba(249, 115, 22, 0.08);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .sidebar-item.active i { color: var(--primary-color); }
+
+        .credit-badge {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.28), rgba(249, 115, 22, 0.12));
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+            color: var(--text-primary);
+            padding: 0.55rem 1.1rem;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            font-size: 1.05rem;
+            border: 1px solid var(--glass-border-strong);
+            box-shadow: var(--shadow-orange);
+            letter-spacing: 0.01em;
+        }
+
+        .credit-badge i { color: var(--primary-light); }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding: 1rem 1.25rem 1.4rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* ===== Layout ===== */
+        .content-area {
+            background: transparent;
+            min-height: 100vh;
+            padding: 2rem 2.25rem;
+        }
+
+        .dashboard-card {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            padding: 1.6rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            box-shadow: var(--shadow-lg);
+            background: var(--bg-card-hover);
+            border-color: rgba(249, 115, 22, 0.18);
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.1rem;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(120deg, rgba(249, 115, 22, 0.10), rgba(255, 255, 255, 0.02));
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: var(--radius-lg);
+        }
+
+        .dashboard-header h4 {
+            font-weight: 700;
+        }
+
+        .dashboard-header h4 span {
+            color: var(--primary-light);
+        }
+
+        /* ===== Profile card ===== */
+        .profile-card {
+            background: linear-gradient(160deg, rgba(249, 115, 22, 0.16), rgba(255, 255, 255, 0.02));
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+            color: var(--text-primary);
+            border-radius: var(--radius-lg);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border: 1px solid var(--glass-border-strong);
+            box-shadow: var(--shadow-orange);
+        }
+
+        .profile-avatar {
+            width: 116px;
+            height: 116px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-color);
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            display: block;
+            box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15), var(--shadow-orange);
+        }
+
+        .profile-card h5 {
+            font-weight: 700;
+        }
+
+        .profile-card p#profileHeadline {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ===== Entity cards ===== */
+        .achievement-card, .certificate-card, .internship-card, .academic-card {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+            border-radius: var(--radius-md);
+            padding: 1.4rem 1.5rem;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 1rem;
+            transition: all 0.25s ease;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .achievement-card { border-left: 4px solid var(--success-color); }
+        .certificate-card { border-left: 4px solid var(--primary-color); }
+        .internship-card { border-left: 4px solid var(--info-color); }
+        .academic-card { border-left: 4px solid var(--primary-color); }
+
+        .achievement-card:hover, .certificate-card:hover, .internship-card:hover, .academic-card:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-lg);
+            background: var(--bg-card-hover);
+        }
+
+        .achievement-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--btn-glass-secondary);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+            flex-shrink: 0;
+        }
+
+        .achievement-card .achievement-icon {
+            background: rgba(34, 197, 94, 0.14);
+            color: var(--success-color);
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+
+        /* ===== Skill tags & badges ===== */
+        .skill-tag {
+            background: var(--btn-glass-accent);
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+            color: var(--text-primary);
+            padding: 0.45rem 0.95rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 0.25rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid rgba(249, 115, 22, 0.35);
+        }
+
+        .skill-tag .remove-skill {
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 11px;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+
+        .skill-tag .remove-skill:hover { transform: scale(1.15); }
+
+        .badge-custom {
+            background: var(--btn-glass-primary);
+            color: var(--text-primary);
+            padding: 0.4rem 0.9rem;
+            border-radius: var(--radius-pill);
+            margin: 0.2rem;
+            display: inline-block;
+            border: 1px solid rgba(249, 115, 22, 0.4);
+            font-size: 0.82rem;
+            font-weight: 500;
+        }
+
+        /* ===== Buttons ===== */
+        .btn {
+            border-radius: var(--radius-sm);
+            padding: 0.65rem 1.35rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+            border: 1px solid transparent;
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+        }
+
+        .btn:active { transform: translateY(1px); }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-color: var(--primary-dark);
+            color: #0a0a0b;
+            font-weight: 700;
+            box-shadow: var(--shadow-orange);
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.08);
+            box-shadow: 0 10px 26px -4px rgba(249, 115, 22, 0.5);
+            color: #0a0a0b;
+        }
+
+        .btn-success {
+            background: var(--btn-glass-secondary);
+            border-color: var(--secondary-color);
+            color: var(--text-primary);
+        }
+
+        .btn-success:hover { background: rgba(34, 197, 94, 0.25); color: var(--text-primary); }
+
+        .btn-warning {
+            background: rgba(234, 179, 8, 0.18);
+            border-color: var(--warning-color);
+            color: var(--text-primary);
+        }
+
+        .btn-info {
+            background: rgba(56, 189, 248, 0.16);
+            border-color: var(--info-color);
+            color: var(--text-primary);
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.18);
+            border-color: var(--danger-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--glass-border);
+            color: var(--text-secondary);
+        }
+
+        .btn-outline-primary {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-light);
+            background: transparent;
+        }
+
+        .btn-outline-primary:hover {
+            background: var(--btn-glass-primary);
+            color: var(--text-primary);
+            border-color: var(--primary-color);
+        }
+
+        .btn-outline-success { border-color: var(--success-color); color: var(--success-color); background: transparent; }
+        .btn-outline-success:hover { background: var(--btn-glass-secondary); color: var(--text-primary); }
+
+        .btn-outline-info { border-color: var(--info-color); color: var(--info-color); background: transparent; }
+        .btn-outline-info:hover { background: rgba(56, 189, 248, 0.16); color: var(--text-primary); }
+
+        .btn-outline-warning { border-color: var(--warning-color); color: var(--warning-color); background: transparent; }
+        .btn-outline-warning:hover { background: rgba(234, 179, 8, 0.18); color: var(--text-primary); }
+
+        .btn-sm { padding: 0.4rem 0.9rem; font-size: 0.8rem; }
+
+        /* ===== Forms ===== */
+        .form-control, textarea.form-control, select.form-control {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            border-radius: var(--radius-sm);
+            padding: 0.6rem 0.9rem;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem var(--primary-soft);
+            color: var(--text-primary);
+        }
+
+        .form-control::placeholder { color: var(--text-muted); }
+        .form-control[readonly] { opacity: 0.65; cursor: not-allowed; }
+
+        .form-label {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 0.4rem;
+        }
+
+        /* ===== Modal ===== */
+        .modal-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--glass-border-strong);
+            border-radius: var(--radius-lg);
+            backdrop-filter: var(--glass-backdrop);
+            -webkit-backdrop-filter: var(--glass-backdrop);
+        }
+
+        .modal-header {
+            background: linear-gradient(120deg, rgba(249, 115, 22, 0.18), transparent);
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        .modal-title { font-weight: 700; }
+
+        .modal-body, .modal-footer { color: var(--text-primary); }
+        .modal-footer { border-top: 1px solid var(--glass-border); }
+
+        .btn-close { filter: invert(1); opacity: 0.75; }
+        .btn-close:hover { opacity: 1; }
+
+        /* ===== Text utilities ===== */
+        .text-muted { color: var(--text-muted) !important; }
+        .text-white { color: var(--text-primary) !important; }
+        .text-light { color: var(--text-secondary) !important; }
+        .text-primary { color: var(--primary-light) !important; }
+        .text-success { color: var(--success-color) !important; }
+        .text-warning { color: var(--warning-color) !important; }
+        .text-info { color: var(--info-color) !important; }
+        .text-danger { color: var(--danger-color) !important; }
+
+        .small-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+        }
+
+        /* ===== Stat tiles (Overview) ===== */
+        .stat-tile {
+            text-align: center;
+            padding: 1.2rem 0.75rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--glass-border);
+            transition: all 0.25s ease;
+        }
+
+        .stat-tile:hover { transform: translateY(-2px); }
+
+        .stat-tile.tone-primary { background: rgba(249, 115, 22, 0.10); border-color: rgba(249, 115, 22, 0.28); }
+        .stat-tile.tone-success { background: rgba(34, 197, 94, 0.10); border-color: rgba(34, 197, 94, 0.28); }
+        .stat-tile.tone-warning { background: rgba(234, 179, 8, 0.10); border-color: rgba(234, 179, 8, 0.28); }
+        .stat-tile.tone-info { background: rgba(56, 189, 248, 0.10); border-color: rgba(56, 189, 248, 0.28); }
+
+        .stat-tile h3 { font-weight: 800; margin-bottom: 0.1rem; }
+
+        /* ===== Nav pills (Achievement filters) ===== */
+        #achievementFilters .nav-link {
+            color: var(--text-secondary);
+            border-radius: var(--radius-pill);
+            padding: 0.5rem 1.1rem;
+            font-weight: 500;
+            font-size: 0.88rem;
+            margin-right: 0.4rem;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        #achievementFilters .nav-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        #achievementFilters .nav-link.active {
+            background: var(--btn-glass-primary);
+            border: 1px solid var(--glass-border-strong);
+            color: var(--text-primary) !important;
+        }
+
+        /* ===== Cursor helper ===== */
+        .cursor-pointer { cursor: pointer; }
+
+        /* ===== Portfolio cards ===== */
+        #portfolio .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            transition: all 0.25s ease;
+        }
+        #portfolio .card:hover {
+            border-color: rgba(249, 115, 22, 0.3);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        #portfolio .card-body h6 { font-weight: 700; color: var(--text-primary); }
+
+        /* ===== Section spacing ===== */
+        .content-section h5, .content-section h6 { color: var(--text-primary); }
+
+        /* Responsive */
+        @media (max-width: 767px) {
+            .dashboard-sidebar { min-height: auto; position: relative; }
+            .content-area { padding: 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 px-0">
+                <div class="dashboard-sidebar">
+                    <div class="sidebar-brand">
+                        <div class="brand-mark"><i class="fas fa-satellite"></i></div>
+                        <span class="brand-name">Orbit</span>
+                    </div>
+
+                    <div class="p-3 pt-0">
+                        <div class="text-center mb-4">
+                            <img id="userAvatar" src="images\profiles\default-student.svg" alt="Profile" class="rounded-circle mb-2 small-avatar">
+                            <h6 class="text-white mb-0" id="userName">Arjun Sharma</h6>
+                            <small class="text-light" id="userCourse">B.Tech CSE - 3rd Year</small>
+                        </div>
+
+                        <div class="credit-badge text-center mb-4 d-block">
+                            <i class="fas fa-star me-2"></i>
+                            <span id="userCredits">450</span> Credits
+                        </div>
+
+                        <nav class="nav flex-column">
+                            <div class="sidebar-item active" onclick="showSection('overview')">
+                                <i class="fas fa-tachometer-alt me-2"></i>Overview
+                            </div>
+                            <div class="sidebar-item" onclick="showSection('profile')">
+                                <i class="fas fa-user me-2"></i>Profile
+                            </div>
+                            <div class="sidebar-item" onclick="showSection('achievements')">
+                                <i class="fas fa-trophy me-2"></i>Achievements
+                            </div>
+                            <div class="sidebar-item" onclick="showSection('certificates')">
+                                <i class="fas fa-certificate me-2"></i>Certificates
+                            </div>
+                            <div class="sidebar-item" onclick="showSection('internships')">
+                                <i class="fas fa-briefcase me-2"></i>Internships
+                            </div>
+                            <div class="sidebar-item" onclick="showSection('academics')">
+                                <i class="fas fa-graduation-cap me-2"></i>Academic Records
+                            </div>
+                            <div class="sidebar-item" onclick="showSection('skills')">
+                                <i class="fas fa-code me-2"></i>Skills
+                            </div>
+                            <!-- Portfolio Option -->
+                            <div class="sidebar-item" onclick="viewPortfolio()">
+                                <i class="fas fa-file-alt me-2"></i>Portfolio
+                            </div>
+                            <div class="sidebar-item" onclick="window.location.href='job-portal.html'">
+                                <i class="fas fa-briefcase me-2"></i>Job Portal
+                            </div>
+                        </nav>
+                    </div>
+
+                    <div class="sidebar-footer">
+                        <button class="btn btn-outline-primary w-100" onclick="logout()">
+                            <i class="fas fa-sign-out-alt me-2"></i>Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10">
+                <div class="content-area">
+                    <!-- Header -->
+                    <div class="dashboard-header">
+                        <div class="container-fluid">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h4 class="mb-0">Welcome back, <span id="welcomeName">Arjun</span>!</h4>
+                                    <small class="text-muted">Manage your academic journey and achievements</small>
+                                </div>
+                                <div class="col-auto">
+                                    <button class="btn btn-primary" onclick="generateResume()">
+                                        <i class="fas fa-download me-2"></i>Generate Resume
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Overview Section -->
+                    <div id="overview" class="content-section">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="dashboard-card">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-chart-line text-primary me-2"></i>Quick Stats
+                                    </h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-3 col-6">
+                                            <div class="stat-tile tone-primary">
+                                                <h3 class="text-primary mb-1" id="totalAchievements">4</h3>
+                                                <small class="text-muted">Achievements</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-6">
+                                            <div class="stat-tile tone-success">
+                                                <h3 class="text-success mb-1" id="totalCertificates">6</h3>
+                                                <small class="text-muted">Certificates</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-6">
+                                            <div class="stat-tile tone-warning">
+                                                <h3 class="text-warning mb-1" id="totalInternships">3</h3>
+                                                <small class="text-muted">Internships</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-6">
+                                            <div class="stat-tile tone-info">
+                                                <h3 class="text-info mb-1" id="currentCGPA">8.7</h3>
+                                                <small class="text-muted">CGPA</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dashboard-card">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-trophy text-warning me-2"></i>Recent Achievements
+                                    </h5>
+                                    <div id="recentAchievements">
+                                        <div class="achievement-card">
+                                            <div class="d-flex align-items-start">
+                                                <div class="achievement-icon me-3">
+                                                    <i class="fas fa-trophy"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-1">Winner - Nova Hackathon 2024</h6>
+                                                    <p class="text-muted mb-1">Led a team of 6 to develop an AI-powered healthcare solution</p>
+                                                    <small class="text-success">March 2024</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="achievement-card">
+                                            <div class="d-flex align-items-start">
+                                                <div class="achievement-icon me-3">
+                                                    <i class="fas fa-medal"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-1">Best Paper Award - ICSET 2024</h6>
+                                                    <p class="text-muted mb-1">Research paper on "Machine Learning in Edge Computing"</p>
+                                                    <small class="text-success">February 2024</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="profile-card">
+                                    <img id="profileImage" src="images\profiles\default-student.svg" alt="Profile" class="profile-avatar">
+                                    <h5 class="mb-1" id="profileName">Arjun Sharma</h5>
+                                    <p class="mb-3" id="profileHeadline">Full Stack Developer | AI Enthusiast | Open Source Contributor</p>
+                                    <div class="d-flex justify-content-center gap-2 mb-3">
+                                        <a href="#" class="btn btn-sm btn-outline-primary"><i class="fab fa-linkedin"></i></a>
+                                        <a href="#" class="btn btn-sm btn-outline-primary"><i class="fab fa-github"></i></a>
+                                        <a href="#" class="btn btn-sm btn-outline-primary"><i class="fas fa-globe"></i></a>
+                                    </div>
+                                    <div id="skillTags" class="mb-3">
+                                        <span class="badge-custom">JavaScript</span>
+                                        <span class="badge-custom">React</span>
+                                        <span class="badge-custom">Node.js</span>
+                                        <span class="badge-custom">Python</span>
+                                        <span class="badge-custom">Machine Learning</span>
+                                    </div>
+                                </div>
+
+                                <div class="dashboard-card mt-3">
+                                    <h6 class="card-title">
+                                        <i class="fas fa-calendar text-info me-2"></i>Upcoming Events
+                                    </h6>
+                                    <div class="small">
+                                        <div class="d-flex justify-content-between align-items-center mb-2 pb-2" style="border-bottom: 1px solid var(--glass-border);">
+                                            <span>Tech Symposium 2024</span>
+                                            <span class="text-muted">Oct 15</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center mb-2 pb-2" style="border-bottom: 1px solid var(--glass-border);">
+                                            <span>AWS Cloud Workshop</span>
+                                            <span class="text-muted">Oct 22</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span>Placement Drive</span>
+                                            <span class="text-muted">Nov 5</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dashboard-card">
+                                    <h6 class="card-title">
+                                        <i class="fas fa-rocket text-primary me-2"></i>Quick Actions
+                                    </h6>
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-outline-primary btn-sm" onclick="generateResume()">
+                                            <i class="fas fa-file-alt me-1"></i>Generate Resume
+                                        </button>
+                                        <button class="btn btn-outline-success btn-sm" onclick="viewPortfolio()">
+                                            <i class="fas fa-briefcase me-1"></i>View Portfolio
+                                        </button>
+                                        <button class="btn btn-outline-info btn-sm">
+                                            <i class="fas fa-newspaper me-1"></i>Browse Articles
+                                        </button>
+                                        <button class="btn btn-outline-warning btn-sm">
+                                            <i class="fas fa-calendar-plus me-1"></i>Find Events
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Section -->
+                    <div id="profile" class="content-section" style="display: none;">
+                        <div class="dashboard-card">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-user text-primary me-2"></i>Personal Information
+                                </h5>
+                                <button class="btn btn-outline-primary btn-sm" onclick="editProfile()">
+                                    <i class="fas fa-edit me-1"></i>Edit Profile
+                                </button>
+                            </div>
+
+                            <form id="profileForm">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="text-center mb-4">
+                                            <img id="editProfileImage" src="images/profiles/default-student.svg" alt="Profile" class="profile-avatar mb-3">
+                                            <div>
+                                                <input type="file" id="profileImageInput" class="d-none" accept="image/*" onchange="handleProfileImageUpload(this)">
+                                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="document.getElementById('profileImageInput').click()">
+                                                    <i class="fas fa-camera me-1"></i>Change Photo
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Full Name</label>
+                                            <input type="text" class="form-control" id="fullName" value="Arjun Sharma">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Headline</label>
+                                            <input type="text" class="form-control" id="headline" value="Aspiring Software Engineer | AI Enthusiast">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Bio</label>
+                                            <textarea class="form-control" id="bio" rows="3">Passionate about technology and innovation. Love to solve complex problems.</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="email" value="arjun.sharma@student.anits.edu.in" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Phone Number</label>
+                                            <input type="tel" class="form-control" id="phone" value="+91 9876543210">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">College</label>
+                                            <input type="text" class="form-control" id="college" value="ANITS" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Class Teacher Mail ID</label>
+                                            <input type="email" class="form-control" id="classTeacherEmail" value="rajesh.kumar@anits.edu.in" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Class Teacher Code</label>
+                                            <input type="text" class="form-control" id="classTeacherCode" value="RAJESH-1001" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Father's Name</label>
+                                            <input type="text" class="form-control" id="fatherName" value="Raj Sharma">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Mother's Name</label>
+                                            <input type="text" class="form-control" id="motherName" value="Priya Sharma">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Course & Year</label>
+                                            <input type="text" class="form-control" id="courseYear" value="B.Tech CSE - 3rd Year" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h6 class="mb-3 mt-2">Academic Mentorship</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Class Teacher Email <i class="fas fa-info-circle text-muted ms-1" title="Teacher assigned to approve your achievements"></i></label>
+                                            <input type="email" class="form-control" id="classTeacherEmail" placeholder="teacher@anits.edu.in">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Class Teacher Code</label>
+                                            <input type="text" class="form-control" id="classTeacherCode" placeholder="Optional">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h6 class="mb-3">Social Media Links</h6>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label">LinkedIn</label>
+                                            <input type="url" class="form-control" id="linkedin" value="https://linkedin.com/in/arjunsharma">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label">GitHub</label>
+                                            <input type="url" class="form-control" id="github" value="https://github.com/arjunsharma">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label">Portfolio Website</label>
+                                            <input type="url" class="form-control" id="portfolio" value="https://arjunsharma.dev">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-secondary me-2" onclick="cancelEdit()">Cancel</button>
+                                    <button type="button" class="btn btn-primary" id="saveProfileBtn" style="display:none;" onclick="saveProfile()"><i class="fas fa-save me-1"></i>Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                   <!-- Achievements Section -->
+                    <div id="achievements" class="content-section" style="display: none;">
+                        <div class="dashboard-card">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-trophy text-warning me-2"></i>Achievements
+                                </h5>
+                                <button class="btn btn-success" onclick="addAchievement()">
+                                    <i class="fas fa-plus me-1"></i>Add Achievement
+                                </button>
+                            </div>
+
+                            <ul class="nav nav-pills mb-4" id="achievementFilters">
+                                <li class="nav-item">
+                                    <a class="nav-link active cursor-pointer" onclick="filterAchievements('all', this)">All</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link cursor-pointer text-success" onclick="filterAchievements('approved', this)"><i class="fas fa-check-circle me-1"></i>Verified</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link cursor-pointer text-warning" onclick="filterAchievements('pending', this)"><i class="fas fa-clock me-1"></i>Pending</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link cursor-pointer text-danger" onclick="filterAchievements('rejected', this)"><i class="fas fa-times-circle me-1"></i>Rejected</a>
+                                </li>
+                            </ul>
+
+                            <div id="achievementsList">
+                                <!-- Dynamic content loaded from backend -->
+                                <div class="text-center py-4 text-muted">
+                                    <i class="fas fa-spinner fa-spin fa-2x mb-2"></i>
+                                    <p>Loading achievements...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certificates Section -->
+                    <div id="certificates" class="content-section" style="display: none;">
+                        <div class="dashboard-card">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-certificate text-primary me-2"></i>Certificates
+                                </h5>
+                                <button class="btn btn-success" onclick="addCertificate()">
+                                    <i class="fas fa-plus me-1"></i>Add Certificate
+                                </button>
+                            </div>
+
+                            <div id="certificatesList">
+                                <div class="certificate-card">
+                                    <div class="d-flex align-items-start">
+                                        <div class="achievement-icon me-3" style="background: rgba(249, 115, 22, 0.16); color: var(--primary-color); border: 1px solid var(--primary-color);">
+                                            <i class="fab fa-aws"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">AWS Certified Solutions Architect - Associate</h6>
+                                            <p class="text-muted mb-1">Amazon Web Services certification for cloud architecture</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <small class="text-primary">Issued: August 15, 2024</small>
+                                                <a href="#" class="btn btn-sm btn-outline-primary">View Certificate</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="certificate-card">
+                                    <div class="d-flex align-items-start">
+                                        <div class="achievement-icon me-3" style="background: rgba(249, 115, 22, 0.16); color: var(--primary-color); border: 1px solid var(--primary-color);">
+                                            <i class="fab fa-google"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">Google Cloud Professional Cloud Architect</h6>
+                                            <p class="text-muted mb-1">Professional certification for Google Cloud Platform</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <small class="text-primary">Issued: July 22, 2024</small>
+                                                <a href="#" class="btn btn-sm btn-outline-primary">View Certificate</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="certificate-card">
+                                    <div class="d-flex align-items-start">
+                                        <div class="achievement-icon me-3" style="background: rgba(249, 115, 22, 0.16); color: var(--primary-color); border: 1px solid var(--primary-color);">
+                                            <i class="fas fa-robot"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">Machine Learning Specialization - Stanford</h6>
+                                            <p class="text-muted mb-1">Coursera specialization by Andrew Ng covering ML fundamentals</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <small class="text-primary">Issued: June 10, 2024</small>
+                                                <a href="#" class="btn btn-sm btn-outline-primary">View Certificate</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="certificate-card">
+                                    <div class="d-flex align-items-start">
+                                        <div class="achievement-icon me-3" style="background: rgba(249, 115, 22, 0.16); color: var(--primary-color); border: 1px solid var(--primary-color);">
+                                            <i class="fab fa-react"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">React.js Professional Developer</h6>
+                                            <p class="text-muted mb-1">Meta certification for advanced React.js development</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <small class="text-primary">Issued: May 18, 2024</small>
+                                                <a href="#" class="btn btn-sm btn-outline-primary">View Certificate</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="certificate-card">
+                                    <div class="d-flex align-items-start">
+                                        <div class="achievement-icon me-3" style="background: rgba(249, 115, 22, 0.16); color: var(--primary-color); border: 1px solid var(--primary-color);">
+                                            <i class="fab fa-docker"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">Docker Certified Associate</h6>
+                                            <p class="text-muted mb-1">Docker certification for containerization and orchestration</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <small class="text-primary">Issued: April 25, 2024</small>
+                                                <a href="#" class="btn btn-sm btn-outline-primary">View Certificate</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="certificate-card">
+                                    <div class="d-flex align-items-start">
+                                        <div class="achievement-icon me-3" style="background: rgba(249, 115, 22, 0.16); color: var(--primary-color); border: 1px solid var(--primary-color);">
+                                            <i class="fab fa-python"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">Python for Data Science - IBM</h6>
+                                            <p class="text-muted mb-1">IBM certification covering Python programming for data analysis</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <small class="text-primary">Issued: March 12, 2024</small>
+                                                <a href="#" class="btn btn-sm btn-outline-primary">View Certificate</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Internships Section -->
+                    <div id="internships" class="content-section" style="display: none;">
+                        <div class="dashboard-card">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-briefcase text-info me-2"></i>Internships
+                                </h5>
+                                <button class="btn btn-info" onclick="addInternship()">
+                                    <i class="fas fa-plus me-1"></i>Add Internship
+                                </button>
+                            </div>
+
+                            <div id="internshipsList">
+                                <div class="internship-card">
+                                    <div class="d-flex align-items-start">
+                                        <div class="achievement-icon me-3" style="background: rgba(56, 189, 248, 0.16); color: var(--info-color); border: 1px solid var(--info-color);">
+                                            <i class="fas fa-building"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">Software Development Intern - Tech Mahindra</h6>
+                                            <p class="text-muted mb-2">Full-stack development using React.js, Node.js, and MongoDB. Built 3 client projects and mentored junior interns.</p>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <small class="text-info">June 2024 - August 2024 (3 months)</small>
+                                                <span class="badge-custom">Remote</span>
+                                            </div>
+                                            <div>
+                                                <span class="skill-tag" style="font-size: 0.75rem;">React.js</span>
+                                                <span class="skill-tag" style="font-size: 0.75rem;">Node.js</span>
+                                                <span class="skill-tag" style="font-size: 0.75rem;">MongoDB</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="internship-card">
+                                    <div class="d-flex align-items-start">
+                                        <div class="achievement-icon me-3" style="background: rgba(56, 189, 248, 0.16); color: var(--info-color); border: 1px solid var(--info-color);">
+                                            <i class="fas fa-robot"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">ML Research Intern - IIT Hyderabad</h6>
+                                            <p class="text-muted mb-2">Worked on computer vision projects using PyTorch and TensorFlow. Developed image classification models with 95% accuracy.</p>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <small class="text-info">December 2023 - February 2024 (3 months)</small>
+                                                <span class="badge-custom">On-site</span>
+                                            </div>
+                                            <div>
+                                                <span class="skill-tag" style="font-size: 0.75rem;">Python</span>
+                                                <span class="skill-tag" style="font-size: 0.75rem;">PyTorch</span>
+                                                <span class="skill-tag" style="font-size: 0.75rem;">Computer Vision</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="internship-card">
+                                    <div class="d-flex align-items-start">
+                                        <div class="achievement-icon me-3" style="background: rgba(56, 189, 248, 0.16); color: var(--info-color); border: 1px solid var(--info-color);">
+                                            <i class="fas fa-mobile-alt"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">Mobile App Development Intern - Startup Hub</h6>
+                                            <p class="text-muted mb-2">Developed cross-platform mobile applications using React Native. Published 2 apps on Play Store with 1000+ downloads.</p>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <small class="text-info">June 2023 - August 2023 (2 months)</small>
+                                                <span class="badge-custom">Hybrid</span>
+                                            </div>
+                                            <div>
+                                                <span class="skill-tag" style="font-size: 0.75rem;">React Native</span>
+                                                <span class="skill-tag" style="font-size: 0.75rem;">JavaScript</span>
+                                                <span class="skill-tag" style="font-size: 0.75rem;">Firebase</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Academic Records Section -->
+                    <div id="academics" class="content-section" style="display: none;">
+                        <div class="dashboard-card">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-graduation-cap text-primary me-2"></i>Academic Records
+                                </h5>
+                                <button class="btn btn-primary" onclick="addAcademicRecord()">
+                                    <i class="fas fa-plus me-1"></i>Add Record
+                                </button>
+                            </div>
+
+                            <div class="row mb-4 g-3">
+                                <div class="col-md-3 col-6">
+                                    <div class="stat-tile tone-primary">
+                                        <h3 class="text-primary mb-1">8.7</h3>
+                                        <p class="text-muted mb-0 small">Current CGPA</p>
+                                        <small class="text-muted">Out of 10.0</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <div class="stat-tile tone-success">
+                                        <h3 class="text-success mb-1">94%</h3>
+                                        <p class="text-muted mb-0 small">Attendance</p>
+                                        <small class="text-muted">Current Semester</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <div class="stat-tile tone-warning">
+                                        <h3 class="text-warning mb-1">6</h3>
+                                        <p class="text-muted mb-0 small">Semesters</p>
+                                        <small class="text-muted">Completed</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <div class="stat-tile tone-info">
+                                        <h3 class="text-info mb-1">156</h3>
+                                        <p class="text-muted mb-0 small">Credits</p>
+                                        <small class="text-muted">Completed</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="academicRecordsList">
+                                <div class="academic-card">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-8">
+                                            <h6 class="mb-1">Semester 6 - Spring 2024</h6>
+                                            <p class="text-muted mb-1">Machine Learning, Cloud Computing, Software Engineering, Database Systems</p>
+                                            <small class="text-primary">April 2024</small>
+                                        </div>
+                                        <div class="col-md-4 text-md-end">
+                                            <h4 class="text-primary mb-0">9.2</h4>
+                                            <small class="text-muted">SGPA</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="academic-card">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-8">
+                                            <h6 class="mb-1">Semester 5 - Fall 2023</h6>
+                                            <p class="text-muted mb-1">Computer Networks, Operating Systems, Web Technologies, Compiler Design</p>
+                                            <small class="text-primary">December 2023</small>
+                                        </div>
+                                        <div class="col-md-4 text-md-end">
+                                            <h4 class="text-primary mb-0">8.8</h4>
+                                            <small class="text-muted">SGPA</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="academic-card">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-8">
+                                            <h6 class="mb-1">Semester 4 - Spring 2023</h6>
+                                            <p class="text-muted mb-1">Data Structures & Algorithms, Object Oriented Programming, Digital Logic Design</p>
+                                            <small class="text-primary">April 2023</small>
+                                        </div>
+                                        <div class="col-md-4 text-md-end">
+                                            <h4 class="text-primary mb-0">8.5</h4>
+                                            <small class="text-muted">SGPA</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills Section -->
+                    <div id="skills" class="content-section" style="display: none;">
+                        <div class="dashboard-card">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-code text-info me-2"></i>Skills & Technologies
+                                </h5>
+                                <button class="btn btn-info" onclick="addSkill()">
+                                    <i class="fas fa-plus me-1"></i>Add Skill
+                                </button>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="mb-3">Programming Languages</h6>
+                                    <div class="mb-4">
+                                        <span class="skill-tag">
+                                            JavaScript
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            Python
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            Java
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            C++
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            TypeScript
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="mb-3">Frontend Technologies</h6>
+                                    <div class="mb-4">
+                                        <span class="skill-tag">
+                                            React.js
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            Next.js
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            Vue.js
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            HTML5
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            CSS3
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            Tailwind CSS
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="mb-3">Backend Technologies</h6>
+                                    <div class="mb-4">
+                                        <span class="skill-tag">
+                                            Node.js
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            Express.js
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            Django
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            Flask
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            Spring Boot
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="mb-3">Databases</h6>
+                                    <div class="mb-4">
+                                        <span class="skill-tag">
+                                            MongoDB
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            MySQL
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            PostgreSQL
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            Redis
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="mb-3">Cloud & DevOps</h6>
+                                    <div class="mb-4">
+                                        <span class="skill-tag">
+                                            AWS
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            Google Cloud
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            Docker
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            Kubernetes
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            Git
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="mb-3">AI & Machine Learning</h6>
+                                    <div class="mb-4">
+                                        <span class="skill-tag">
+                                            TensorFlow
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            PyTorch
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            Scikit-learn
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            Pandas
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                        <span class="skill-tag">
+                                            NumPy
+                                            <button class="remove-skill" onclick="removeSkill(this)">×</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Portfolio Section -->
+                    <div id="portfolio" class="content-section" style="display: none;">
+                        <div class="dashboard-card">
+                            <h5 class="card-title">
+                                <i class="fas fa-file-alt text-primary me-2"></i>Portfolio & Resume
+                            </h5>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card mb-3">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-file-pdf fa-3x text-danger mb-3"></i>
+                                            <h6>Generate Resume</h6>
+                                            <p class="text-muted small">Auto-generate a professional resume with your data</p>
+                                            <button class="btn btn-danger" onclick="generateResume()">
+                                                <i class="fas fa-download me-1"></i>Download PDF
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card mb-3">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-globe fa-3x text-primary mb-3"></i>
+                                            <h6>Portfolio Website</h6>
+                                            <p class="text-muted small">Create a shareable online portfolio</p>
+                                            <button class="btn btn-primary" onclick="generatePortfolio()">
+                                                <i class="fas fa-external-link-alt me-1"></i>Generate Link
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Articles Section -->
+                    <div id="articles" class="content-section" style="display: none;">
+                        <div class="dashboard-card">
+                            <h5 class="card-title">
+                                <i class="fas fa-newspaper text-info me-2"></i>Educational Articles
+                            </h5>
+                            <p class="text-muted">Read articles published by faculty members</p>
+
+                            <div id="articlesList">
+                                <!-- Dynamic content -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Events Section -->
+                    <div id="events" class="content-section" style="display: none;">
+                        <div class="dashboard-card">
+                            <h5 class="card-title">
+                                <i class="fas fa-calendar text-warning me-2"></i>Events & Opportunities
+                            </h5>
+
+                            <div id="eventsList">
+                                <!-- Dynamic content -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Achievement Modal -->
+    <div class="modal fade" id="addAchievementModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Achievement</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="achievementForm">
+                        <div class="mb-3">
+                            <label class="form-label">Title *</label>
+                            <input type="text" class="form-control" id="achievementTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description *</label>
+                            <textarea class="form-control" id="achievementDescription" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Category *</label>
+                            <select class="form-control" id="achievementCategory" required>
+                                <option value="hackathon">Hackathon</option>
+                                <option value="certification">Certification</option>
+                                <option value="internship">Internship</option>
+                                <option value="publication">Publication</option>
+                                <option value="research">Research</option>
+                                <option value="project">Project</option>
+                                <option value="competition">Competition</option>
+                                <option value="sports">Sports</option>
+                                <option value="cultural">Cultural</option>
+                                <option value="seminar">Seminar</option>
+                                <option value="volunteering">Volunteering</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Date *</label>
+                            <input type="date" class="form-control" id="achievementDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Upload Image/Document</label>
+                            <input type="file" class="form-control" id="achievementFile" accept="image/*,.pdf">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="saveAchievement()">Save Achievement</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/script.js?v=3"></script>
+    <script src="js/data-manager.js?v=3"></script>
+    <script src="js/student-dashboard.js?v=3"></script>
+</body>
+</html>

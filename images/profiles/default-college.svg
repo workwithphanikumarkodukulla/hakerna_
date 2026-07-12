@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+  <defs>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6f42c1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5a32a3;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <circle cx="75" cy="75" r="75" fill="url(#grad3)"/>
+  <rect x="45" y="40" width="60" height="40" rx="5" fill="white"/>
+  <rect x="50" y="90" width="50" height="30" rx="3" fill="white"/>
+  <text x="75" y="140" text-anchor="middle" fill="#6f42c1" font-family="Arial, sans-serif" font-size="13" font-weight="bold">College</text>
+</svg>
