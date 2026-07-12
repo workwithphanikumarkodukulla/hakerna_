@@ -53,7 +53,7 @@ const upload = multer({
 
 const app = express();
 
-app.use(helmet({ crossOriginResourcePolicy: false }));
+app.use(helmet({ crossOriginResourcePolicy: false, contentSecurityPolicy: false }));
 app.use(cors({ origin: config.appOrigin === '*' ? true : config.appOrigin, credentials: true }));
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true }));
