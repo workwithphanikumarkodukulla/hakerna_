@@ -197,6 +197,9 @@ app.post('/api/achievements/:id/upload-proof', authenticate, upload.single('file
     res.status(201).json(proof);
 }));
 
+// Serve frontend static files from the parent directory
+app.use(express.static(path.join(__dirname, '..', '..')));
+
 app.use(notFound);
 app.use(errorHandler);
 
